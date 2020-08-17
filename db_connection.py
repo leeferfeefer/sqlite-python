@@ -48,25 +48,25 @@ def main():
 
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
-    conn = None
+    connection = None
     try:
-        conn = sqlite3.connect(db_file)
+        connection = sqlite3.connect(db_file)
         print(sqlite3.version)
-        return conn
+        return connection
     except Error as e:
         print(e)
 
-    return conn
+    return connection
 
 
-def create_table(conn, create_table_sql):
+def create_table(connection, create_table_sql):
     """ create a table from the create_table_sql statement
-    :param conn: Connection object
+    :param connection: Connection object
     :param create_table_sql: a CREATE TABLE statement
     :return:
     """
     try:
-        c = conn.cursor()
+        c = connection.cursor()
         c.execute(create_table_sql)
     except Error as e:
         print(e)
