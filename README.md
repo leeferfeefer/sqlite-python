@@ -12,5 +12,13 @@ Create: `python3 -m venv env`
 Run: `source env/bin/activate`
 
 ## Commands:
-First run: `sqlite3 ./pythonsqlite.db`   
+First run:    
+`sqlite3 ./pythonsqlite.db`   
+`.header on`   
+`.mode column`
+   
 To view tables: `.tables`
+
+To view entities:   
+`SELECT * FROM projects;`   
+`SELECT * FROM tasks;`
