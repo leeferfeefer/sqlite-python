@@ -34,16 +34,19 @@ def main():
         print("Error! cannot create the database connection.")
 
     with connection:
-        project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30')
-        project_id = create_project(connection, project)
+        # project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30')
+        # project_id = create_project(connection, project)
+        #
+        # # tasks
+        # task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
+        # task_2 = ('Confirm with user about the top requirements', 1, 1, project_id, '2015-01-03', '2015-01-05')
+        #
+        # # create tasks
+        # create_task(connection, task_1)
+        # create_task(connection, task_2)
 
-        # tasks
-        task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
-        task_2 = ('Confirm with user about the top requirements', 1, 1, project_id, '2015-01-03', '2015-01-05')
-
-        # create tasks
-        create_task(connection, task_1)
-        create_task(connection, task_2)
+        # update task
+        update_task(connection, (2, '2015-01-04', '2015-01-06', 2))
 
 
 def create_connection(db_file):
@@ -101,6 +104,24 @@ def create_task(connection, task):
     cur.execute(sql, task)
     connection.commit()
     return cur.lastrowid
+
+
+def update_task(connection, task):
+    """
+    update priority, begin_date, and end date of a task
+    :param connection:
+    :param task:
+    :return: project id
+    """
+    sql = ''' UPDATE tasks
+              SET priority = ? ,
+                  begin_date = ? ,
+                  end_date = ?
+              WHERE id = ?'''
+    cur = connection.cursor()
+    cur.execute(sql, task)
+    connection.commit()
+
 
 if __name__ == '__main__':
     main()
