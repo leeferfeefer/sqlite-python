@@ -10,3 +10,7 @@ https://packaging.python.org/guides/installing-using-pip-and-virtual-environment
 
 Create: `python3 -m venv env`   
 Run: `source env/bin/activate`
+
+## Commands:
+First run: `sqlite3 ./pythonsqlite.db`   
+To view tables: `.tables`
