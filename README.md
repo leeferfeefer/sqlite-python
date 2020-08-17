@@ -19,6 +19,6 @@ First run:
    
 To view tables: `.tables`
 
-To view entities:   
+To view records:   
 `SELECT * FROM projects;`   
 `SELECT * FROM tasks;`
