@@ -1,3 +1,5 @@
+#NOTE: highly recommended to not run a production web application with SQLite.
+
 # SQLite DB for Python
 
 
