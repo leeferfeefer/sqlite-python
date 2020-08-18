@@ -46,8 +46,11 @@ def main():
         # create_task(connection, task_2)
 
         # update task
-        update_task(connection, (2, '2015-01-04', '2015-01-06', 2))
+        # update_task(connection, (2, '2015-01-04', '2015-01-06', 2))
 
+        # delete task
+        # delete_task(connection, 2)
+        delete_all_tasks(connection)
 
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
@@ -120,6 +123,31 @@ def update_task(connection, task):
               WHERE id = ?'''
     cur = connection.cursor()
     cur.execute(sql, task)
+    connection.commit()
+
+
+def delete_task(connection, id):
+    """
+    Delete a task by task id
+    :param connection:  Connection to the SQLite database
+    :param id: id of the task
+    :return:
+    """
+    sql = 'DELETE FROM tasks WHERE id=?'
+    cur = connection.cursor()
+    cur.execute(sql, (id,))
+    connection.commit()
+
+
+def delete_all_tasks(connection):
+    """
+    Delete all rows in the tasks table
+    :param connection: Connection to the SQLite database
+    :return:
+    """
+    sql = 'DELETE FROM tasks'
+    cur = connection.cursor()
+    cur.execute(sql)
     connection.commit()
 
 
