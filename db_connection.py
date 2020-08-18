@@ -34,23 +34,29 @@ def main():
         print("Error! cannot create the database connection.")
 
     with connection:
-        # project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30')
-        # project_id = create_project(connection, project)
-        #
-        # # tasks
-        # task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
-        # task_2 = ('Confirm with user about the top requirements', 1, 1, project_id, '2015-01-03', '2015-01-05')
-        #
-        # # create tasks
-        # create_task(connection, task_1)
-        # create_task(connection, task_2)
+        project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30')
+        project_id = create_project(connection, project)
+
+        # tasks
+        task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
+        task_2 = ('Confirm with user about the top requirements', 1, 1, project_id, '2015-01-03', '2015-01-05')
+
+        # create tasks
+        create_task(connection, task_1)
+        create_task(connection, task_2)
 
         # update task
         # update_task(connection, (2, '2015-01-04', '2015-01-06', 2))
 
         # delete task
         # delete_task(connection, 2)
-        delete_all_tasks(connection)
+        # delete_all_tasks(connection)
+
+        print("1. Query task by priority:")
+        select_task_by_priority(connection, 1)
+
+        print("2. Query all tasks")
+        select_all_tasks(connection)
 
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
@@ -149,6 +155,37 @@ def delete_all_tasks(connection):
     cur = connection.cursor()
     cur.execute(sql)
     connection.commit()
+
+
+def select_all_tasks(connection):
+    """
+    Query all rows in the tasks table
+    :param connection: the Connection object
+    :return:
+    """
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM tasks")
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+
+
+def select_task_by_priority(conn, priority):
+    """
+    Query tasks by priority
+    :param conn: the Connection object
+    :param priority:
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tasks WHERE priority=?", (priority,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
 
 
 if __name__ == '__main__':
