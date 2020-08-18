@@ -2,7 +2,7 @@
 
 # SQLite DB for Python
 
-
+https://www.fullstackpython.com/databases.html
 https://www.sqlitetutorial.net/sqlite-python/creating-database/
 
 
